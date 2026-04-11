@@ -75,12 +75,15 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
   return (
     <View style={styles.container}>
       <View style={[styles.header, { backgroundColor: song.color }]}>
-        <TouchableOpacity onPress={onBack}>
+        <TouchableOpacity onPress={onBack} style={styles.backButton}>
+          <Text style={styles.backButtonText}>← 뒤로</Text>
+        </TouchableOpacity>
+        <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitle}>
             {song.emoji} {song.title}
           </Text>
-          <Text style={styles.headerSubtitle}>탭하여 다른 곡 선택 →</Text>
-        </TouchableOpacity>
+          <Text style={styles.headerSubtitle}>응원법</Text>
+        </View>
       </View>
 
       <View style={styles.toggleContainer}>
@@ -148,6 +151,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderBottomWidth: 2,
     borderBottomColor: '#ff69b4',
+  },
+  backButton: {
+    marginBottom: 10,
+  },
+  backButtonText: {
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  headerTitleContainer: {
+    alignItems: 'center',
   },
   headerTitle: {
     fontSize: 28,

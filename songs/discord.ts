@@ -1,4 +1,7 @@
 import { Song } from './types';
+import { starharmony } from './discord-subsongs/starharmony';
+import { discordsong } from './discord-subsongs/discordsong';
+import { mysterydiary } from './discord-subsongs/mysterydiary';
 
 export const discord: Song = {
   id: 'discord',
@@ -6,16 +9,16 @@ export const discord: Song = {
   emoji: '🎮',
   color: '#7289da',
   chantData: [
-    { type: 'section', text: '[시작]' },
-    { type: 'chant', text: 'Discord! Discord!', subtext: '두 번 외치기' },
+    { type: 'section', text: '[앨범]', effect: 'glow' },
+    { type: 'lyric', text: 'Discord 앨범에는 3개의 곡이 수록되어 있습니다', intensity: 3 },
     { type: 'break', text: '' },
-    
-    { type: 'lyric', text: '디스코드에서 만난 너' },
-    { type: 'chant', text: '🎮 디스코드! 🎮', subtext: '함성!' },
-    { type: 'break', text: '' },
-    
-    { type: 'section', text: '[후렴]' },
-    { type: 'lyric', text: 'Discord Discord' },
-    { type: 'chant', text: '👏 짝짝짝-짝짝 👏', subtext: '박수 리듬' },
+    { type: 'lyric', text: '1. 별의 하모니', intensity: 3 },
+    { type: 'lyric', text: '2. Discord', intensity: 3 },
+    { type: 'lyric', text: '3. 수수께끼 다이어리', intensity: 3 },
+  ],
+  subSongs: [
+    starharmony,
+    discordsong,
+    mysterydiary,
   ],
 };
