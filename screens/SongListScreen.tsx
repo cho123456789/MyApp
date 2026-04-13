@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#1a1a2e',
     borderBottomWidth: 2,
-    borderBottomColor: '#ff69b4',
+    borderBottomColor: '#a855f7',
   },
   headerTitle: {
     fontSize: 24,
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   headerSubtitle: {
     fontSize: 12,
-    color: '#b8b8ff',
+    color: '#c4b5fd',
     textAlign: 'center',
     marginTop: 4,
   },
@@ -205,10 +205,10 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(0, 0, 0, 0.4)',
   },
   buttonInnerSelected: {
-    borderTopColor: 'rgba(255, 105, 180, 0.8)',
-    borderLeftColor: 'rgba(255, 105, 180, 0.6)',
-    borderRightColor: 'rgba(255, 105, 180, 0.6)',
-    borderBottomColor: 'rgba(255, 105, 180, 0.8)',
+    borderTopColor: 'rgba(168, 85, 247, 0.8)',
+    borderLeftColor: 'rgba(168, 85, 247, 0.6)',
+    borderRightColor: 'rgba(168, 85, 247, 0.6)',
+    borderBottomColor: 'rgba(168, 85, 247, 0.8)',
     borderWidth: 4,
   },
   imageBackground: {
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(255, 105, 180, 0.2)',
+    backgroundColor: 'rgba(168, 85, 247, 0.2)',
     borderRadius: 8,
   },
   titleOverlay: {
@@ -264,10 +264,10 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   mainCardInnerSelected: {
-    borderTopColor: 'rgba(155, 89, 182, 0.9)',
-    borderLeftColor: 'rgba(155, 89, 182, 0.7)',
-    borderRightColor: 'rgba(155, 89, 182, 0.7)',
-    borderBottomColor: 'rgba(155, 89, 182, 0.9)',
+    borderTopColor: 'rgba(168, 85, 247, 0.9)',
+    borderLeftColor: 'rgba(168, 85, 247, 0.7)',
+    borderRightColor: 'rgba(168, 85, 247, 0.7)',
+    borderBottomColor: 'rgba(168, 85, 247, 0.9)',
     borderWidth: 5,
   },
   mainCardImageStyle: {
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(155, 89, 182, 0.25)',
+    backgroundColor: 'rgba(168, 85, 247, 0.25)',
     borderRadius: 14,
   },
   mainCardTitleOverlay: {

@@ -73,7 +73,7 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: `${song.color}08` }]}>
       <View style={[styles.header, { backgroundColor: song.color }]}>
         <TouchableOpacity onPress={onBack} style={styles.backButton}>
           <Text style={styles.backButtonText}>← 뒤로</Text>
@@ -86,7 +86,7 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
         </View>
       </View>
 
-      <View style={styles.toggleContainer}>
+      <View style={[styles.toggleContainer, { backgroundColor: `${song.color}08` }]}>
         <TouchableOpacity
           style={[
             styles.toggleButton,
@@ -143,14 +143,14 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#f5f0ff',
   },
   header: {
     paddingTop: 60,
     paddingBottom: 20,
     paddingHorizontal: 20,
     borderBottomWidth: 2,
-    borderBottomColor: '#ff69b4',
+    borderBottomColor: '#a855f7',
   },
   backButton: {
     marginBottom: 10,
@@ -179,19 +179,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 15,
     gap: 10,
-    backgroundColor: '#e6f3ff',
+    backgroundColor: '#f5f0ff',
   },
   toggleButton: {
     flex: 1,
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 25,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     borderWidth: 2,
-    borderColor: '#ddd',
+    borderColor: '#e0e0e0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
   },
   toggleButtonActive: {
-    borderColor: '#ff69b4',
+    borderColor: '#a855f7',
   },
   toggleButtonText: {
     fontSize: 16,
@@ -211,7 +216,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#ff1493',
+    color: '#c026d3',
     textAlign: 'center',
     marginBottom: 15,
     marginTop: 5,
@@ -219,27 +224,28 @@ const styles = StyleSheet.create({
   section: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#4a90e2',
+    color: '#8b5cf6',
     marginTop: 10,
     marginBottom: 5,
   },
   lyricText: {
     fontSize: 15,
-    color: '#333',
+    color: '#4a4a5e',
     marginBottom: 6,
     lineHeight: 22,
+    fontWeight: '500',
   },
   chantContainer: {
     padding: 15,
     borderRadius: 12,
     marginVertical: 8,
     borderLeftWidth: 4,
-    borderLeftColor: '#ff69b4',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 5,
+    borderLeftColor: '#a855f7',
+    shadowColor: '#8b5cf6',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    elevation: 6,
   },
   chantText: {
     fontSize: 17,

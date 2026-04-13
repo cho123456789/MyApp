@@ -17,4 +17,5 @@ export interface Song {
   color: string;
   chantData: ChantLine[];
   subSongs?: Song[];  // 앨범 내 서브곡들 (optional)
+  image?: any;  // 앨범 커버 이미지 (optional)
 }
