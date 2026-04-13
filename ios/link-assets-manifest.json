@@ -1,0 +1,33 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/MonaS10-Bold.ttf",
+      "sha1": "ba3b2221012716ca37e8b52ebb431e889eaffc88"
+    },
+    {
+      "path": "assets/fonts/MonaS10.ttf",
+      "sha1": "0f4db527660587550a851fd2347b0139c9c9ac34"
+    },
+    {
+      "path": "assets/fonts/MonaS10x12-Bold.ttf",
+      "sha1": "a6b1fc4e635dc0bc93ee1f8c67d8f00a273f3a87"
+    },
+    {
+      "path": "assets/fonts/MonaS10x12.ttf",
+      "sha1": "7d07a35d166968a2dbee5bdb875193e18d9149d7"
+    },
+    {
+      "path": "assets/fonts/MonaS12-Bold.ttf",
+      "sha1": "4e8949f5a858d7b99250b3bdcec81ca4f8a9ec5b"
+    },
+    {
+      "path": "assets/fonts/MonaS12.ttf",
+      "sha1": "58a1fa30ae30b01359aa7df6fbb6bdb7b79f171d"
+    },
+    {
+      "path": "assets/fonts/MonaS8x12.ttf",
+      "sha1": "9b59df2992b3199c8abd409645b53436d44f929a"
+    }
+  ]
+}
