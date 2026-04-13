@@ -54,7 +54,7 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
       return (
         <View
           key={index}
-          style={[styles.chantContainer, { backgroundColor: song.color }]}
+          style={styles.chantContainer}
         >
           <Text style={styles.chantText}>{line.text}</Text>
           {line.subtext && (
@@ -73,8 +73,8 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: `${song.color}08` }]}>
-      <View style={[styles.header, { backgroundColor: song.color }]}>
+    <View style={styles.container}>
+      <View style={styles.header}>
         <TouchableOpacity onPress={onBack} style={styles.backButton}>
           <Text style={styles.backButtonText}>← 뒤로</Text>
         </TouchableOpacity>
@@ -86,12 +86,12 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
         </View>
       </View>
 
-      <View style={[styles.toggleContainer, { backgroundColor: `${song.color}08` }]}>
+      <View style={styles.toggleContainer}>
         <TouchableOpacity
           style={[
             styles.toggleButton,
             !showChantOnly && styles.toggleButtonActive,
-            !showChantOnly && { backgroundColor: song.color },
+            !showChantOnly && { backgroundColor: '#a78bfa' },
           ]}
           onPress={() => setShowChantOnly(false)}
         >
@@ -108,7 +108,7 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
           style={[
             styles.toggleButton,
             showChantOnly && styles.toggleButtonActive,
-            showChantOnly && { backgroundColor: song.color },
+            showChantOnly && { backgroundColor: '#a78bfa' },
           ]}
           onPress={() => setShowChantOnly(true)}
         >
@@ -149,29 +149,36 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     paddingBottom: 20,
     paddingHorizontal: 20,
-    borderBottomWidth: 2,
-    borderBottomColor: '#a855f7',
+    backgroundColor: '#a78bfa',
+    borderBottomWidth: 3,
+    borderBottomColor: '#c4b5fd',
+    shadowColor: '#8b5cf6',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
   },
   backButton: {
     marginBottom: 10,
   },
   backButtonText: {
     fontSize: 16,
-    color: '#fff',
-    fontWeight: 'bold',
+    color: '#1f1f1f',
+    fontFamily: 'MonaS12-Bold',
   },
   headerTitleContainer: {
     alignItems: 'center',
   },
   headerTitle: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontFamily: 'MonaS12-Bold',
+    color: '#1f1f1f',
     textAlign: 'center',
   },
   headerSubtitle: {
     fontSize: 14,
-    color: '#fff',
+    fontFamily: 'MonaS12',
+    color: '#3f3f3f',
     textAlign: 'center',
     marginTop: 5,
   },
@@ -200,7 +207,7 @@ const styles = StyleSheet.create({
   },
   toggleButtonText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'MonaS12-Bold',
     color: '#888',
     textAlign: 'center',
   },
@@ -215,7 +222,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'MonaS12-Bold',
     color: '#c026d3',
     textAlign: 'center',
     marginBottom: 15,
@@ -223,24 +230,25 @@ const styles = StyleSheet.create({
   },
   section: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'MonaS12-Bold',
     color: '#8b5cf6',
     marginTop: 10,
     marginBottom: 5,
   },
   lyricText: {
     fontSize: 15,
+    fontFamily: 'MonaS12',
     color: '#4a4a5e',
     marginBottom: 6,
     lineHeight: 22,
-    fontWeight: '500',
   },
   chantContainer: {
     padding: 15,
     borderRadius: 12,
     marginVertical: 8,
+    backgroundColor: '#a78bfa',
     borderLeftWidth: 4,
-    borderLeftColor: '#a855f7',
+    borderLeftColor: '#8b5cf6',
     shadowColor: '#8b5cf6',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.25,
@@ -249,14 +257,15 @@ const styles = StyleSheet.create({
   },
   chantText: {
     fontSize: 17,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontFamily: 'MonaS12-Bold',
+    color: '#1a1a2e',
     textAlign: 'center',
     lineHeight: 24,
   },
   chantSubtext: {
     fontSize: 13,
-    color: '#fff',
+    fontFamily: 'MonaS12',
+    color: '#2a2a3e',
     textAlign: 'center',
     marginTop: 5,
     fontStyle: 'italic',
@@ -270,6 +279,6 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'MonaS12-Bold',
   },
 });

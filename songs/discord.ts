@@ -6,7 +6,7 @@ import { mysterydiary } from './discord-subsongs/mysterydiary';
 export const discord: Song = {
   id: 'discord',
   title: 'Discord',
-  emoji: '🎮',
+  emoji: '',
   color: '#7289da',
   image: require('../assets/discord_main.png'),
   chantData: [
