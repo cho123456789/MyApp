@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import { Song, ChantLine } from '../songs';
+import { Song, Lyric } from '../songs';
 
 interface SongDetailScreenProps {
   song: Song;
@@ -17,58 +17,41 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
   song,
   onBack,
 }) => {
-  const [showChantOnly, setShowChantOnly] = useState(false);
+  const [showMemberNames, setShowMemberNames] = useState(true);
 
-  const renderLine = (line: ChantLine, index: number) => {
-    // 응원법만 보기 모드일 때는 응원 파트만 표시
-    if (
-      showChantOnly &&
-      line.type !== 'chant' &&
-      line.type !== 'section' &&
-      line.type !== 'title'
-    ) {
-      return null;
-    }
-
-    if (line.type === 'break') {
-      return <View key={index} style={styles.break} />;
-    }
-
-    if (line.type === 'title') {
-      return (
-        <Text key={index} style={styles.titleText}>
-          {line.text}
-        </Text>
-      );
-    }
-
-    if (line.type === 'section') {
-      return (
-        <Text key={index} style={styles.section}>
-          {line.text}
-        </Text>
-      );
-    }
-
-    if (line.type === 'chant') {
-      return (
-        <View
-          key={index}
-          style={styles.chantContainer}
-        >
-          <Text style={styles.chantText}>{line.text}</Text>
-          {line.subtext && (
-            <Text style={styles.chantSubtext}>{line.subtext}</Text>
-          )}
-        </View>
-      );
-    }
-
-    // lyric
+  const renderLine = (line: Lyric, index: number, prevLine?: Lyric) => {
+    const showVerse = !prevLine || prevLine.verse !== line.verse;
+    
     return (
-      <Text key={index} style={styles.lyricText}>
-        {line.text}
-      </Text>
+      <View key={index}>
+        {/* 절 표시 (1절, 2절 등) */}
+        {showVerse && line.verse && (
+          <Text style={styles.verseText}>
+            {line.verse}
+          </Text>
+        )}
+        
+        {/* 가사 라인 */}
+        <View style={styles.lyricContainer}>
+          {/* 멤버 이름 표시 */}
+          {showMemberNames && (
+            <Text style={[
+              styles.memberText,
+              line.member === '바위게' && styles.memberTextAll
+            ]}>
+              {line.member}
+            </Text>
+          )}
+          
+          {/* 가사 텍스트 */}
+          <Text style={[
+            styles.lyricText,
+            line.member === '바위게' && styles.lyricTextAll
+          ]}>
+            {line.text}
+          </Text>
+        </View>
+      </View>
     );
   };
 
@@ -90,35 +73,35 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
         <TouchableOpacity
           style={[
             styles.toggleButton,
-            !showChantOnly && styles.toggleButtonActive,
-            !showChantOnly && { backgroundColor: '#a78bfa' },
+            showMemberNames && styles.toggleButtonActive,
+            showMemberNames && { backgroundColor: '#a78bfa' },
           ]}
-          onPress={() => setShowChantOnly(false)}
+          onPress={() => setShowMemberNames(true)}
         >
           <Text
             style={[
               styles.toggleButtonText,
-              !showChantOnly && styles.toggleButtonTextActive,
+              showMemberNames && styles.toggleButtonTextActive,
             ]}
           >
-            전체 보기
+            멤버 표시
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.toggleButton,
-            showChantOnly && styles.toggleButtonActive,
-            showChantOnly && { backgroundColor: '#a78bfa' },
+            !showMemberNames && styles.toggleButtonActive,
+            !showMemberNames && { backgroundColor: '#a78bfa' },
           ]}
-          onPress={() => setShowChantOnly(true)}
+          onPress={() => setShowMemberNames(false)}
         >
           <Text
             style={[
               styles.toggleButtonText,
-              showChantOnly && styles.toggleButtonTextActive,
+              !showMemberNames && styles.toggleButtonTextActive,
             ]}
           >
-            응원법만 보기
+            가사만 보기
           </Text>
         </TouchableOpacity>
       </View>
@@ -128,7 +111,9 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.contentContainer}>
-          {song.chantData.map((line, index) => renderLine(line, index))}
+          {song.lyrics.map((line, index) => 
+            renderLine(line, index, index > 0 ? song.lyrics[index - 1] : undefined)
+          )}
         </View>
         <View style={styles.footer}>
           <Text style={[styles.footerText, { color: song.color }]}>
@@ -220,58 +205,42 @@ const styles = StyleSheet.create({
   contentContainer: {
     padding: 20,
   },
-  titleText: {
-    fontSize: 24,
-    fontFamily: 'MonaS12-Bold',
-    color: '#c026d3',
-    textAlign: 'center',
-    marginBottom: 15,
-    marginTop: 5,
-  },
-  section: {
+  verseText: {
     fontSize: 18,
     fontFamily: 'MonaS12-Bold',
     color: '#8b5cf6',
-    marginTop: 10,
-    marginBottom: 5,
+    marginTop: 20,
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  lyricContainer: {
+    flexDirection: 'row',
+    marginBottom: 8,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    backgroundColor: '#ffffff',
+  },
+  memberText: {
+    fontSize: 14,
+    fontFamily: 'MonaS12-Bold',
+    color: '#a78bfa',
+    width: 60,
+    marginRight: 10,
+  },
+  memberTextAll: {
+    color: '#f59e0b',
   },
   lyricText: {
+    flex: 1,
     fontSize: 15,
     fontFamily: 'MonaS12',
     color: '#4a4a5e',
-    marginBottom: 6,
     lineHeight: 22,
   },
-  chantContainer: {
-    padding: 15,
-    borderRadius: 12,
-    marginVertical: 8,
-    backgroundColor: '#a78bfa',
-    borderLeftWidth: 4,
-    borderLeftColor: '#8b5cf6',
-    shadowColor: '#8b5cf6',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.25,
-    shadowRadius: 6,
-    elevation: 6,
-  },
-  chantText: {
-    fontSize: 17,
+  lyricTextAll: {
     fontFamily: 'MonaS12-Bold',
-    color: '#1a1a2e',
-    textAlign: 'center',
-    lineHeight: 24,
-  },
-  chantSubtext: {
-    fontSize: 13,
-    fontFamily: 'MonaS12',
-    color: '#2a2a3e',
-    textAlign: 'center',
-    marginTop: 5,
-    fontStyle: 'italic',
-  },
-  break: {
-    height: 12,
+    color: '#f59e0b',
   },
   footer: {
     padding: 30,

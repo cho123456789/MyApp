@@ -9,13 +9,11 @@ export const discord: Song = {
   emoji: '',
   color: '#7289da',
   image: require('../assets/discord_main.png'),
-  chantData: [
-    { type: 'section', text: '[앨범]', effect: 'glow' },
-    { type: 'lyric', text: 'Discord 앨범에는 3개의 곡이 수록되어 있습니다', intensity: 3 },
-    { type: 'break', text: '' },
-    { type: 'lyric', text: '1. 별의 하모니', intensity: 3 },
-    { type: 'lyric', text: '2. Discord', intensity: 3 },
-    { type: 'lyric', text: '3. 수수께끼 다이어리', intensity: 3 },
+  lyrics: [
+    { member: 'All', text: 'Discord 앨범에는 3개의 곡이 수록되어 있습니다' },
+    { member: 'All', text: '1. 별의 하모니' },
+    { member: 'All', text: '2. Discord' },
+    { member: 'All', text: '3. 수수께끼 다이어리' },
   ],
   subSongs: [
     starharmony,
