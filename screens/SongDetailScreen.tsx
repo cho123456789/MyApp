@@ -37,7 +37,8 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
           {showMemberNames && (
             <Text style={[
               styles.memberText,
-              line.member === '바위게' && styles.memberTextAll
+              line.member === '바위게' && styles.memberTextAll,
+              line.member === '쵸단' && styles.memberTextChodan
             ]}>
               {line.member}
             </Text>
@@ -46,7 +47,8 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
           {/* 가사 텍스트 */}
           <Text style={[
             styles.lyricText,
-            line.member === '바위게' && styles.lyricTextAll
+            line.member === '바위게' && styles.lyricTextAll,
+            line.member === '쵸단' && styles.lyricTextChodan
           ]}>
             {line.text}
           </Text>
@@ -114,11 +116,6 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
           {song.lyrics.map((line, index) => 
             renderLine(line, index, index > 0 ? song.lyrics[index - 1] : undefined)
           )}
-        </View>
-        <View style={styles.footer}>
-          <Text style={[styles.footerText, { color: song.color }]}>
-            💜 QWER 화이팅! 💜
-          </Text>
         </View>
       </ScrollView>
     </View>
@@ -231,6 +228,9 @@ const styles = StyleSheet.create({
   memberTextAll: {
     color: '#f59e0b',
   },
+  memberTextChodan: {
+    color: '#ec4899',
+  },
   lyricText: {
     flex: 1,
     fontSize: 15,
@@ -242,12 +242,8 @@ const styles = StyleSheet.create({
     fontFamily: 'MonaS12-Bold',
     color: '#f59e0b',
   },
-  footer: {
-    padding: 30,
-    alignItems: 'center',
-  },
-  footerText: {
-    fontSize: 18,
+  lyricTextChodan: {
     fontFamily: 'MonaS12-Bold',
+    color: '#ec4899',
   },
 });
