@@ -6,13 +6,29 @@ export const discordsong: Song = {
   emoji: '👾',
   color: '#7289da',
   lyrics: [
-    { verse: '1절', member: 'All', text: 'Discord! Discord!' },
-    { verse: '1절', member: '시연', text: '디스코드에서 만난 너' },
-    { verse: '1절', member: '쵸단', text: '목소리만으로도 설레' },
-    { verse: '1절', member: 'All', text: '👾 디스코드! 👾' },
-    { verse: '1절', member: '마젠타', text: 'Discord Discord 너와 나' },
-    { verse: '1절', member: 'All', text: '👏 짝짝짝-짝짝 👏' },
-    { verse: '1절', member: '히나', text: '온라인 속 우리의 이야기' },
-    { verse: '1절', member: 'All', text: '👾 디스코드! 👾' },
+       { member: '바위게', text: '(함성)\n홍지혜! 이아희! 장나영! 이시연!\n디스코드 화이팅!\nQ!W!E!R!' },
+       { member: '시연', text: '딱하나만 물어볼게 넌\n완벽이란게 있다고 생각해?\n조금 어색한 하모니라도 해도\n그것도 그것대로 꽤' },
+       { member: '바위게', text: '멋지잖아' },
+       { member: '시연', text: '누군가 나를 보고 수근대겠지만\n그런 무례함은 도로 넣어둬요' },
+
+       { member: '시연', text: '발걸음과 발걸음 사이\n쌓여만 간 망설임과 무리란 말\n네가 내 곁에 와주던\n순간 전부 사라졌어' },
+
+       { member: '시연', text: '소란하게 내린 별의 빛\n그 틈 사이 사이로\n다시 투명히 비친 눈부신\n나만의 꿈의 조각들\n너와 함께라는 이유로\n운명을 믿어 난\n눈 앞에 펼쳐진 미랠 향해 인사를 해' },
+
+       { member: '바위게', text: '빛나는 별처럼\n(Ah, ah, ah)\n(Ah, ah, ah)\n저 빛나는 별처럼\n(Ah, ah, ah)' },
+
+       { member: '시연', text: '난 아이처럼 혼자선 꼭\n서투르고 헤매는 걸\n잡은 두 손의 온기로\n좀 더 멀리 데려가 줘' },
+
+       { member: '시연', text: '소란하게 내린 별의 빛\n그 틈 사이 사이로\n다시 투명히 비친 눈부신\n나만의 꿈의 조각들\n너와 함께라는 이유로\n운명을 믿어 난\n눈 앞에 펼쳐진 미랠 향해 인사를 해' },
+
+       { member: '바위게', text: '빛나는 별처럼' },
+
+       { member: '쵸단', text: '내 맘을 다 아는 듯이\n지어주는 웃음이\n푸른 새벽 같아서' },
+
+       { member: '시연', text: '뭐든 가능할 것 같아\n가장 빛나는 시작도\n찬란해질 내일도\n이제 울지 않아' },
+
+       { member: '시연', text: '너와 나로 이어진 별자리\n우리만의 하모니\n아주 길고 긴 시간 지나도\n반짝일 우릴 테니까\n까만 어둠이 또 온대도\n두렵지 않아 난\n놓치지 않도록 너의 손을 잡아 줄게' },
+
+       { member: '바위게', text: '빛나는 별처럼\n(Ah, ah, ah)\n저 빛나는 별처럼\n(Ah, ah, ah)\n저 빛나는 별처럼\n(Ah, ah, ah)' },
   ],
 };

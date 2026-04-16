@@ -5,7 +5,10 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator, // 추가
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import YoutubePlayer from 'react-native-youtube-iframe'; // 추가
 import { Song, Lyric } from '../songs';
 
 interface SongDetailScreenProps {
@@ -17,38 +20,28 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
   song,
   onBack,
 }) => {
-  const [showMemberNames, setShowMemberNames] = useState(true);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
 
   const renderLine = (line: Lyric, index: number, prevLine?: Lyric) => {
     const showVerse = !prevLine || prevLine.verse !== line.verse;
-    
+
     return (
       <View key={index}>
-        {/* 절 표시 (1절, 2절 등) */}
         {showVerse && line.verse && (
-          <Text style={styles.verseText}>
-            {line.verse}
-          </Text>
+          <Text style={styles.verseText}>{line.verse}</Text>
         )}
-        
-        {/* 가사 라인 */}
         <View style={styles.lyricContainer}>
-          {/* 멤버 이름 표시 */}
-          {showMemberNames && (
-            <Text style={[
-              styles.memberText,
-              line.member === '바위게' && styles.memberTextAll,
-              line.member === '쵸단' && styles.memberTextChodan
-            ]}>
-              {line.member}
-            </Text>
-          )}
-          
-          {/* 가사 텍스트 */}
+          <Text style={[
+            styles.memberText,
+            line.member === '바위게' && styles.memberTextAll,
+            line.member === '쵸단' && styles.memberTextChodan,
+          ]}>
+            {line.member}
+          </Text>
           <Text style={[
             styles.lyricText,
             line.member === '바위게' && styles.lyricTextAll,
-            line.member === '쵸단' && styles.lyricTextChodan
+            line.member === '쵸단' && styles.lyricTextChodan,
           ]}>
             {line.text}
           </Text>
@@ -58,7 +51,7 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={onBack} style={styles.backButton}>
           <Text style={styles.backButtonText}>← 뒤로</Text>
@@ -67,58 +60,46 @@ export const SongDetailScreen: React.FC<SongDetailScreenProps> = ({
           <Text style={styles.headerTitle}>
             {song.emoji} {song.title}
           </Text>
-          <Text style={styles.headerSubtitle}>응원법</Text>
+          <Text style={styles.headerSubtitle}>응원법 가사</Text>
         </View>
       </View>
 
-      <View style={styles.toggleContainer}>
-        <TouchableOpacity
-          style={[
-            styles.toggleButton,
-            showMemberNames && styles.toggleButtonActive,
-            showMemberNames && { backgroundColor: '#a78bfa' },
-          ]}
-          onPress={() => setShowMemberNames(true)}
-        >
-          <Text
-            style={[
-              styles.toggleButtonText,
-              showMemberNames && styles.toggleButtonTextActive,
-            ]}
-          >
-            멤버 표시
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.toggleButton,
-            !showMemberNames && styles.toggleButtonActive,
-            !showMemberNames && { backgroundColor: '#a78bfa' },
-          ]}
-          onPress={() => setShowMemberNames(false)}
-        >
-          <Text
-            style={[
-              styles.toggleButtonText,
-              !showMemberNames && styles.toggleButtonTextActive,
-            ]}
-          >
-            가사만 보기
-          </Text>
-        </TouchableOpacity>
-      </View>
+      {/* --- 유튜브 영상 섹션 추가됨 --- */}
+      {song.youtubeId ? (
+        <View style={styles.videoSection}>
+          <View style={styles.youtubePlayerContainer}>
+            {isVideoLoading && (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color="#a78bfa" />
+              </View>
+            )}
+            <YoutubePlayer
+              height={220}
+              width="100%"
+              play={true}
+              mute={true}
+              videoId={song.youtubeId}
+              onReady={() => setIsVideoLoading(false)}
+              onError={(e) => console.log("Youtube Error: ", e)} // 에러 확인용
+            />
+          </View>
+        </View>
+      ) : (
+        <View style={{ padding: 20, alignItems: 'center' }}>
+          <Text>영상을 불러올 수 없습니다 (ID 없음)</Text>
+        </View>
+      )}
 
       <ScrollView
         style={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.contentContainer}>
-          {song.lyrics.map((line, index) => 
-            renderLine(line, index, index > 0 ? song.lyrics[index - 1] : undefined)
-          )}
-        </View>
+        {song.lyrics.map((line, index) =>
+          renderLine(line, index, index > 0 ? song.lyrics[index - 1] : undefined)
+        )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -128,17 +109,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f0ff',
   },
   header: {
-    paddingTop: 60,
+    paddingTop: 10,
     paddingBottom: 20,
     paddingHorizontal: 20,
     backgroundColor: '#a78bfa',
     borderBottomWidth: 3,
     borderBottomColor: '#c4b5fd',
-    shadowColor: '#8b5cf6',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 8,
   },
   backButton: {
     marginBottom: 10,
@@ -152,70 +128,61 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerTitle: {
-    fontSize: 28,
+    fontSize: 26,
     fontFamily: 'MonaS12-Bold',
     color: '#1f1f1f',
-    textAlign: 'center',
   },
   headerSubtitle: {
     fontSize: 14,
     fontFamily: 'MonaS12',
     color: '#3f3f3f',
-    textAlign: 'center',
     marginTop: 5,
   },
-  toggleContainer: {
-    flexDirection: 'row',
+  // 영상 관련 스타일
+  videoSection: {
     padding: 15,
-    gap: 10,
     backgroundColor: '#f5f0ff',
   },
-  toggleButton: {
-    flex: 1,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-    backgroundColor: '#ffffff',
-    borderWidth: 2,
-    borderColor: '#e0e0e0',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+  youtubePlayerContainer: {
+    width: '100%',
+    height: 220,
+    borderRadius: 16,
+    overflow: 'hidden',
+    backgroundColor: '#000',
+    elevation: 4,
   },
-  toggleButtonActive: {
-    borderColor: '#a855f7',
-  },
-  toggleButtonText: {
-    fontSize: 16,
-    fontFamily: 'MonaS12-Bold',
-    color: '#888',
-    textAlign: 'center',
-  },
-  toggleButtonTextActive: {
-    color: '#fff',
+  loadingContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
+    zIndex: 1,
   },
   scrollView: {
     flex: 1,
   },
   contentContainer: {
     padding: 20,
+    paddingBottom: 40,
   },
   verseText: {
     fontSize: 18,
     fontFamily: 'MonaS12-Bold',
     color: '#8b5cf6',
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 25,
+    marginBottom: 12,
     textAlign: 'center',
   },
   lyricContainer: {
     flexDirection: 'row',
-    marginBottom: 8,
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 8,
+    marginBottom: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 10,
     backgroundColor: '#ffffff',
   },
   memberText: {
@@ -225,25 +192,15 @@ const styles = StyleSheet.create({
     width: 60,
     marginRight: 10,
   },
-  memberTextAll: {
-    color: '#f59e0b',
-  },
-  memberTextChodan: {
-    color: '#ec4899',
-  },
+  memberTextAll: { color: '#f59e0b' },
+  memberTextChodan: { color: '#ec4899' },
   lyricText: {
     flex: 1,
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: 'MonaS12',
     color: '#4a4a5e',
-    lineHeight: 22,
+    lineHeight: 24,
   },
-  lyricTextAll: {
-    fontFamily: 'MonaS12-Bold',
-    color: '#f59e0b',
-  },
-  lyricTextChodan: {
-    fontFamily: 'MonaS12-Bold',
-    color: '#ec4899',
-  },
+  lyricTextAll: { fontFamily: 'MonaS12-Bold', color: '#f59e0b' },
+  lyricTextChodan: { fontFamily: 'MonaS12-Bold', color: '#ec4899' },
 });
